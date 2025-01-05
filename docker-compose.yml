@@ -1,0 +1,13 @@
+services:
+  tz-postgres:
+    image: 'bitnami/postgresql:latest'
+    container_name: tz-postgres
+    environment:
+      - ALLOW_EMPTY_PASSWORD=true
+    volumes:
+      - 'tz-postgres-data:/bitnami/postgresql'
+    ports:
+      - '5432:5432'
+
+volumes:
+  tz-postgres-data:
