@@ -4,8 +4,8 @@ import "time"
 
 type Book struct {
 	Id          int       `json:"id" gorm:"primaryKey"`
-	Title       string    `json:"title"`
-	Author      string    `json:"author"`
-	Description string    `json:"description"`
-	CreatedAt   time.Time `json:"created_at"`
+	Title       string    `json:"title,omitempty"`
+	Author      string    `json:"author,omitempty"`
+	Description string    `json:"description,omitempty"`
+	CreatedAt   time.Time `json:"created_at,omitempty"`
 }
