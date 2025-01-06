@@ -2,16 +2,17 @@ package book
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"encore.app/db"
 )
 
 type GetBooksQuery struct {
-	Page    int   `query:"page"`
-	PerPage int   `query:"per_page"`
-	From    int64 `query:"from"`
-	To      int64 `query:"to"`
+	Page    int    `query:"page"`
+	PerPage int    `query:"per_page"`
+	From    string `query:"from"`
+	To      string `query:"to"`
 }
 
 type GetBooksResponse struct {
@@ -25,11 +26,15 @@ func (s *Service) GetBooks(ctx context.Context, query *GetBooksQuery) (*GetBooks
 	queryBuilder := s.db.
 		Select("id, created_at")
 
-	if query.From != 0 {
-		queryBuilder.Where("created_at>= ?", time.Unix(query.From, 0))
+	if query.From != "" {
+		from, _ := time.Parse(time.RFC3339, query.From)
+		fmt.Println(query.To, from.Format(time.RFC3339))
+		queryBuilder.Where("created_at>= ?", from)
 	}
-	if query.To != 0 {
-		queryBuilder.Where("created_at <= ?", time.Unix(query.To, 0))
+	if query.To != "" {
+		to, _ := time.Parse(time.RFC3339, query.To)
+		fmt.Println(query.To, to.Format(time.RFC3339))
+		queryBuilder.Where("created_at <= ?", to)
 	}
 
 	queryBuilder.Limit(query.PerPage).
