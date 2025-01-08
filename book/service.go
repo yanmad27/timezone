@@ -2,6 +2,7 @@ package book
 
 import (
 	"encore.app/db"
+	"github.com/submodule-org/submodule.go/v2"
 	"gorm.io/gorm"
 )
 
@@ -11,6 +12,11 @@ type Service struct {
 }
 
 func initService() (*Service, error) {
-	db := db.Init()
+	db, err := db.DBMod.SafeResolve()
+	if err != nil {
+		return nil, err
+	}
 	return &Service{db: db}, nil
 }
+
+var ServiceMod = submodule.Make[*Service](initService)

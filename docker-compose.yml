@@ -6,6 +6,7 @@ services:
       - ALLOW_EMPTY_PASSWORD=true
     volumes:
       - 'tz-postgres-data:/bitnami/postgresql'
+      - './books.sql:/docker-entrypoint-initdb.d/books.sql'
     ports:
       - '5432:5432'
 

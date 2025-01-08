@@ -4,6 +4,8 @@ import (
 	"log"
 	"time"
 
+	"github.com/submodule-org/submodule.go/v2"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -22,8 +24,9 @@ func Init() *gorm.DB {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	
 
 	db.AutoMigrate(&Book{})
 	return db
 }
+
+var DBMod = submodule.Make[*gorm.DB](Init)

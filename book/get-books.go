@@ -23,8 +23,7 @@ type GetBooksResponse struct {
 func (s *Service) GetBooks(ctx context.Context, query *GetBooksQuery) (*GetBooksResponse, error) {
 
 	books := []db.Book{}
-	queryBuilder := s.db.
-		Select("id, created_at")
+	queryBuilder := s.db.Select("id, created_at")
 
 	if query.From != "" {
 		from, _ := time.Parse(time.RFC3339, query.From)

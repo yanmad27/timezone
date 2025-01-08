@@ -1,3 +1,10 @@
+CREATE TABLE books (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(255),
+  author VARCHAR(255),
+  description TEXT,
+  created_at timestamp with time zone
+);
 insert into books (title, author, description, created_at) values ('Joe''s Apartment', 'Rodrigo Riggs', 'Unilat reduct mammoplast', '2024-12-10T23:20:57Z');
 insert into books (title, author, description, created_at) values ('Exhibition', 'Revkah Hofner', 'Electromyogram of eye', '2024-07-14T04:10:32Z');
 insert into books (title, author, description, created_at) values ('Derrida', 'Ulrica Millhill', 'Dx ultrasound-heart', '2024-06-11T04:11:21Z');
